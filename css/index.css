@@ -8,6 +8,11 @@ html, body, #map {
     width: 100vw;
 }
 
+.icon {
+  width: 75%;
+  height: 75%;
+}
+
 .floating {
   position: absolute;
   right: 3vw;
@@ -16,12 +21,23 @@ html, body, #map {
 }
 
 .rounded {
-  width: 3vw;
-  height: 3vw;
+  width: 6vw;
+  height: 6vw;
   border-radius: 50%;
   border: none;
   text-align: center;
   outline: 0;
+}
+
+@media (max-width: 600px) {
+  .floating {
+    bottom: 6vw;
+  }
+
+  .rounded {
+    width: 10vh;
+    height: 10vh;
+  }
 }
 
 .button {
