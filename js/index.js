@@ -10,7 +10,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({
   setView: false,
   maxZoom: 16,
-  watch: true
+  watch: true,
+  timeout: 10000,
+  maximumAge: 2000
 });
 
 // Geolocation
