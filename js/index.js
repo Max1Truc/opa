@@ -11,7 +11,7 @@ map.locate({
   setView: false,
   maxZoom: 16,
   watch: true,
-  timeout: 10000,
+  timeout: 9999999,
   maximumAge: 2000
 });
 
