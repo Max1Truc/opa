@@ -79,7 +79,7 @@ function addr_search() {
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         var myArr = JSON.parse(this.responseText);
-        onAddressFound([ myArr[0].lat, myArr[0].lng ]);
+        onAddressFound([ myArr[0].lat, myArr[0].lon ]);
       }
     };
     xmlhttp.open("GET", url, true);
