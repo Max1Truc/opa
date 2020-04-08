@@ -94,4 +94,6 @@ function initialize_address() {
   }
 }
 
+initialize_address();
+
 document.getElementById("addressbutton").addEventListener("click", addr_search)
