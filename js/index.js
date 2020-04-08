@@ -56,29 +56,42 @@ map.on('locationerror', onLocationError);
 
 var addressCircle = false;
 
-function onAddressFound(address_data) {
-  var latlng = [address_data[0].lat, address_data[0].lon];
-
+function onAddressFound(latlng) {
   if (addressCircle) {
     addressCircle.setLatLng(latlng);
   } else {
-    addressCircle = L.circle(latlng, {radius: 1000, color: "red"});
+    addressCircle = L.circle(latlng, {
+      radius: 1000,
+      color: "red"
+    });
     addressCircle.addTo(map);
   }
+
+  localStorage.setItem("addressLatLng", JSON.stringify(latlng))
 }
 
 function addr_search() {
   var address = prompt("Merci d'entrer votre addresse")
-  var xmlhttp = new XMLHttpRequest();
-  var url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(address);
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var myArr = JSON.parse(this.responseText);
-      onAddressFound(myArr);
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+
+  if (address) {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(address);
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        onAddressFound([ myArr[0].lat, myArr[0].lng ]);
+      }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+  }
+}
+
+function initialize_address() {
+  var latlng = localStorage.getItem("addressLatLng");
+  if (latlng) {
+    onAddressFound(JSON.parse(latlng));
+  }
 }
 
 document.getElementById("addressbutton").addEventListener("click", addr_search)
