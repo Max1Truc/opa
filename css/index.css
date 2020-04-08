@@ -41,6 +41,7 @@ html, body, #map {
 }
 
 .button {
+  background-color: white;
   cursor: pointer;
   user-select: none;
   overflow: hidden;
