@@ -7,50 +7,45 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   subdomains: ['a', 'b', 'c']
 }).addTo(map);
 
-map.locate({
-  setView: false,
-  maxZoom: 16,
-  watch: true,
-  timeout: 9999999,
-  maximumAge: 2000
-});
-
 // Geolocation
 
 zoomed = false;
 marker = false;
 circle = false;
 
-function onLocationFound(e) {
-  var radius = e.accuracy;
+function onLocationFound(geolocation) {
+  var radius = geolocation.coords.accuracy,
+      lat = geolocation.coords.latitude,
+      lng = geolocation.coords.longitude,
+      latlng = [lat, lng];
 
   if (!zoomed) {
-    map.setView(e.latlng, radius);
+    map.setView(latlng, radius);
     zoomed = true;
   }
 
   if (marker) {
-    marker.setLatLng(e.latlng)
+    marker.setLatLng(latlng)
   } else {
-    marker = L.marker(e.latlng);
+    marker = L.marker(latlng);
     marker.addTo(map);
   }
 
   if (circle) {
-    circle.setLatLng(e.latlng);
+    circle.setLatLng(latlng);
     circle.setRadius(radius);
   } else {
-    circle = L.circle(e.latlng, radius);
+    circle = L.circle(latlng, radius);
     circle.addTo(map);
   }
 }
 
-function onLocationError(e) {
-  alert(e.message);
+function getPosition() {
+  return navigator.geolocation.getCurrentPosition(onLocationFound);
 }
 
-map.on('locationfound', onLocationFound);
-map.on('locationerror', onLocationError);
+setInterval(getPosition, 2000);
+getPosition();
 
 // Address location
 
@@ -62,7 +57,7 @@ function onAddressFound(latlng) {
   } else {
     addressCircle = L.circle(latlng, {
       radius: 1000,
-      color: "red"
+      color: "green"
     });
     addressCircle.addTo(map);
   }
