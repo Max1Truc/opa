@@ -1,0 +1,25 @@
+{
+  "name": "Où Puis-je Aller ?",
+  "short_name": "OPA",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#d3d3d3",
+  "theme_color": "#d3d3d3",
+  "description": "Une application web simple permettant de rester dans la limite d'un kilomètre autour de votre lieu d'habitation",
+  "icons": [
+    {
+      "src": "img/icon.svg",
+      "sizes": "32x32 48x48 64x64 72x72 96x96 128x128 256x256"
+    },
+    {
+      "src": "img/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }
+  ]
+}
