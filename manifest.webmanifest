@@ -3,7 +3,8 @@
   "short_name": "OPA",
   "start_url": "/",
   "display": "fullscreen",
-  "background_color": "lightgrey",
+  "background_color": "#d3d3d3",
+  "theme_color": "#d3d3d3",
   "description": "Une application web simple permettant de rester dans la limite d'un kilomètre autour de votre lieu d'habitation",
   "icons": [{
     "src": "img/icon.svg",
