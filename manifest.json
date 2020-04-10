@@ -5,6 +5,8 @@
   "display": "standalone",
   "background_color": "#d3d3d3",
   "theme_color": "#d3d3d3",
+  "lang": "fr-FR",
+  "orientation": "portrait-primary",
   "description": "Une application web simple permettant de rester dans la limite d'un kilomètre autour de votre lieu d'habitation",
   "icons": [
     {
