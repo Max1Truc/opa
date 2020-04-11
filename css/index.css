@@ -29,6 +29,10 @@ html, body, #map {
   outline: 0;
 }
 
+.location {
+  bottom: 12vw;
+}
+
 @media (max-width: 600px) {
   .floating {
     bottom: 6vw;
@@ -37,6 +41,10 @@ html, body, #map {
   .rounded {
     width: 10vh;
     height: 10vh;
+  }
+
+  .location {
+    bottom: 18vw;
   }
 }
 

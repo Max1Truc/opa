@@ -1,13 +1,15 @@
 // Register service worker
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/serviceworker.js', { scope: '/' }).then(function(reg) {
+  navigator.serviceWorker.register('/serviceworker.js', {
+    scope: '/'
+  }).then(function(reg) {
 
-    if(reg.installing) {
+    if (reg.installing) {
       console.log('Service worker installing');
-    } else if(reg.waiting) {
+    } else if (reg.waiting) {
       console.log('Service worker installed');
-    } else if(reg.active) {
+    } else if (reg.active) {
       console.log('Service worker active');
     }
 
@@ -30,16 +32,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 zoomed = false;
 marker = false;
-circle = false;
 
 function onLocationFound(geolocation) {
-  var radius = geolocation.coords.accuracy,
-      lat = geolocation.coords.latitude,
-      lng = geolocation.coords.longitude,
-      latlng = [lat, lng];
+  var lat = geolocation.coords.latitude,
+    lng = geolocation.coords.longitude,
+    latlng = [lat, lng];
 
   if (!zoomed) {
-    map.setView(latlng, radius);
+    map.setView(latlng, 1000);
     zoomed = true;
   }
 
@@ -49,22 +49,13 @@ function onLocationFound(geolocation) {
     marker = L.marker(latlng);
     marker.addTo(map);
   }
-
-  if (circle) {
-    circle.setLatLng(latlng);
-    circle.setRadius(radius);
-  } else {
-    circle = L.circle(latlng, radius);
-    circle.addTo(map);
-  }
 }
 
 function getPosition() {
   return navigator.geolocation.getCurrentPosition(onLocationFound);
 }
 
-setInterval(getPosition, 2000);
-getPosition();
+document.getElementById("locationbutton").addEventListener("click", getPosition);
 
 // Address location
 
@@ -87,17 +78,21 @@ function onAddressFound(latlng) {
 function addr_search() {
   var address = prompt("Merci d'entrer votre addresse")
 
-  if (address) {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(address);
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var myArr = JSON.parse(this.responseText);
-        onAddressFound([ myArr[0].lat, myArr[0].lon ]);
-      }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
+  if (address !== null) {
+    if (address.replace(/ /g, "")) {
+      var xmlhttp = new XMLHttpRequest();
+      var url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(address);
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myArr = JSON.parse(this.responseText);
+          onAddressFound([myArr[0].lat, myArr[0].lon]);
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    } else {
+      localStorage.removeItem("addressLatLng")
+    }
   }
 }
 
