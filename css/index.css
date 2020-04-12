@@ -16,7 +16,7 @@ html, body, #map {
 .floating {
   position: absolute;
   right: 3vw;
-  bottom: 3vw;
+  bottom: 3vh;
   z-index: 9999;
 }
 
@@ -30,12 +30,12 @@ html, body, #map {
 }
 
 .location {
-  bottom: 12vw;
+  bottom: 18vh;
 }
 
 @media (max-width: 600px) {
   .floating {
-    bottom: 6vw;
+    bottom: 6vh;
   }
 
   .rounded {
@@ -44,7 +44,7 @@ html, body, #map {
   }
 
   .location {
-    bottom: 18vw;
+    bottom: 18vh;
   }
 }
 
