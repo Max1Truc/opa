@@ -2,7 +2,7 @@
 
 "Où puis-je aller ?" - Une application web simple permettant de rester dans la limite d'un kilomètre autour de votre lieu d'habitation
 
-Le projet est sous forme d'un site statique, hébergé avec GitHub Pages à l'addresse suivante : https://opa.maxence.site/
+⚠️ Ce site a été créé pendant l'épidémie de coronavirus COVID-19, lorsque les mesures prises limitaient notre liberté de mouvement à un kilomètre autour de chez soi en dehors du travail. Elle est maintenant inutile.
 
 ## Contributions
 
